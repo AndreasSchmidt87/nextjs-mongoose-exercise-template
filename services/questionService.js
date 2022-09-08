@@ -6,11 +6,20 @@ export async function getAllQuestions() {
 
     const questions = await Question.find();
 
-    return questions.map(({ _id, question, answer}) => {
+    const questionArray = questions.map(
+        ({ _id, question, answer}) => {
         return { id: _id, question, answer};
     });
+
+    return questionArray;
 }
 
-export function getQuestionById(id) {
-    return questions.find((question) => question.id === id);
+export async function getQuestionById(questionId) {
+    await dbConnect();
+
+    const question = await Question.findById(questionId);
+
+    const { _id, question, answer} = question;
+    
+    return { _id, question, answer};
 }
