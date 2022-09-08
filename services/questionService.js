@@ -1,4 +1,4 @@
-import dbConnect from "../dbConnet";
+import dbConnect from "../dbConnect";
 import Question from "../models/Question";
 
 export async function getAllQuestions() {
@@ -7,19 +7,9 @@ export async function getAllQuestions() {
     const questions = await Question.find();
 
     const questionArray = questions.map(
-        ({ _id, question, answer}) => {
-        return { id: _id, question, answer};
+        ({ id, question, answer, options}) => {
+        return { id, question, answer, options};
     });
 
     return questionArray;
-}
-
-export async function getQuestionById(questionId) {
-    await dbConnect();
-
-    const question = await Question.findById(questionId);
-
-    const { _id, question, answer} = question;
-    
-    return { _id, question, answer};
 }
