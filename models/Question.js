@@ -5,9 +5,10 @@ const {Schema} = mongoose;
 const questionSchema = new Schema({
     question: {type: String, required: true},
     answer: {type: Number, required: true},
+    options: {type: Array, required: true},
 });
 
 const Question = 
-    mongoose.models.Product || mongoose.model("Question", questionSchema);
+    mongoose.models.Question || mongoose.model("Question", questionSchema);
 
 export default Question;
